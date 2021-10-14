@@ -1,8 +1,14 @@
+import Header from "./components/layout/Header/Header"
+import Home from "./views/Home/Home"
+
 const App = () => {
   return (
-    <div>
-      app
-    </div>
+    <>
+      <Header />
+      <main>
+        <Home />
+      </main>
+    </>
   )
 }
 
