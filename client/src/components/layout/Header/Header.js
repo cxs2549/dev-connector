@@ -3,6 +3,8 @@ import { BsCodeSquare } from 'react-icons/bs'
 import { NavLink, Link } from 'react-router-dom'
 
 const StyledHeader = styled.header`
+position: relative;
+z-index: 11;
 	a {
 		position: relative;
 		&::after {

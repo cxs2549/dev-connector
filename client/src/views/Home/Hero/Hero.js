@@ -28,7 +28,7 @@ const StyledHero = styled.div`
 		padding: .5rem 2rem;
 		border-radius: 99999px;
 		font-weight: 600;
-		font-size: 100%;
+		font-size: 95%;
 		text-transform: uppercase;
 	}
 	h1 {
@@ -41,7 +41,7 @@ const Hero = () => {
 			<div id="image">
 				<img src={hero} alt="" />
 				<div className="absolute top-0 w-full h-full grid place-items-center z-10">
-					<div className="flex flex-col items-center gap-5 justify-center">
+					<div className="flex flex-col items-center gap-2 justify-center">
 						<h1 className="text-3xl md:text-6xl text-white font-semibold uppercase text-center">
 							Developer Connector
 						</h1>

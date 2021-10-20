@@ -2,7 +2,7 @@ import styled from 'styled-components'
 const StyledRegister = styled.div``
 const Register = () => {
 return (
-<StyledRegister>
+<StyledRegister className="bg-yellow-400 h-screen relative">
 Register page
 </StyledRegister>
 )

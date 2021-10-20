@@ -2,7 +2,7 @@ import styled from 'styled-components'
 const StyledDevelopers = styled.div``
 const Developers = () => {
 return (
-<StyledDevelopers>
+<StyledDevelopers className="bg-red-400 h-screen relative">
 developers page
 </StyledDevelopers>
 )
