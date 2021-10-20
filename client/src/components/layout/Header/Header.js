@@ -8,20 +8,26 @@ const StyledHeader = styled.header`
 		&::after {
 			content: '';
 			position: absolute;
-			bottom: -1.2rem;
+			bottom: -1.4rem;
 			left: 0;
-			width: 100%;
+			width: 10%;
 			height: 4px;
 			opacity: 0;
+			border-top-right-radius: 99999px;
+			border-top-left-radius: 99999px;
 			background-color: #333;
-			transition: opacity 200ms;
+			transition: all 300ms ease-in-out;
 		}
+
 		&.active::after {
 			opacity: 1;
+			bottom: -1.2rem;
+			width: 100%;
 		}
 		&.active {
 			opacity: 1;
 		}
+		
 	}
 `
 const Header = () => {
@@ -39,7 +45,7 @@ const Header = () => {
                 {/* links */}
 				<nav className="flex gap-8 capitalize text-sm font-medium">
 					{links.map((link, i) => (
-						<NavLink to={link.name} className="opacity-80">
+						<NavLink to={link.name} className="opacity-75 hover:opacity-100 transition-opacity duration-300">
 							{link.name}
 						</NavLink>
 					))}

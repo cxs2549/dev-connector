@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import hero from '../../../assets/hero.jpg'
 const StyledHero = styled.div`
 	height: calc(100vh - 58px);
 	background-color: red;
 	overflow: hidden;
-    color: white;
+	color: white;
 	#image {
 		position: relative;
 		&::after {
@@ -23,12 +24,16 @@ const StyledHero = styled.div`
 		}
 	}
 
-    button {
-        padding: .5rem 2rem;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 100%;
-    }
+	button {
+		padding: .5rem 2rem;
+		border-radius: 99999px;
+		font-weight: 600;
+		font-size: 100%;
+		text-transform: uppercase;
+	}
+	h1 {
+		opacity: .85;
+	}
 `
 const Hero = () => {
 	return (
@@ -41,13 +46,16 @@ const Hero = () => {
 							Developer Connector
 						</h1>
 						<p className="text-lg text-center md:text-2xl text-white opacity-80">
-							Create a profile/portfolio and colloborate with other
-							developers
+							Create a profile and showcase your portfolio <br className="md:hidden" /> with other developers
 						</p>
-                        <div className="flex gap-5">
-                            <button className="bg-blue-500">Sign up</button>
-                            <button className="border-2">Log in</button>
-                        </div>
+						<div className="flex gap-5 mt-4">
+							<button className="bg-sonyBlue hover:bg-transparent border-2 border-transparent hover:border-white transition-all duration-300 hover:-translate-y-1 relative transform">
+								<Link to="/register">Sign up</Link>
+							</button>
+							<Link to="/login">
+								<button className="border-2 hover:bg-sonyBlue hover:border-transparent hover:-translate-y-1 transform relative transition-all duration-300">Log in</button>
+							</Link>
+						</div>
 					</div>
 				</div>
 			</div>
