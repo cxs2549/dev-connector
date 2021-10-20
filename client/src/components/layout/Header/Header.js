@@ -10,20 +10,19 @@ z-index: 11;
 		&::after {
 			content: '';
 			position: absolute;
-			bottom: -1.4rem;
+			bottom: -1.2rem;
 			left: 0;
 			width: 10%;
 			height: 4px;
 			opacity: 0;
-			border-top-right-radius: 99999px;
-			border-top-left-radius: 99999px;
-			background-color: #333;
+			/* border-top-right-radius: 99999px; */
+			/* border-top-left-radius: 99999px; */
+			background-color: #2249DF;
 			transition: all 300ms ease-in-out;
 		}
 
 		&.active::after {
 			opacity: 1;
-			bottom: -1.2rem;
 			width: 100%;
 		}
 		&.active {
@@ -47,7 +46,7 @@ const Header = () => {
                 {/* links */}
 				<nav className="flex gap-8 capitalize text-sm font-medium">
 					{links.map((link, i) => (
-						<NavLink to={link.name} className="opacity-75 hover:opacity-100 transition-opacity duration-300">
+						<NavLink key={i} to={link.name} className="opacity-75 hover:opacity-100 transition-opacity duration-300">
 							{link.name}
 						</NavLink>
 					))}

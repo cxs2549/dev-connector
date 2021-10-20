@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import hero from '../../../assets/hero.jpg'
 const StyledHero = styled.div`
 	height: calc(100vh - 58px);
-	background-color: red;
 	overflow: hidden;
 	color: white;
 	#image {
@@ -24,13 +23,7 @@ const StyledHero = styled.div`
 		}
 	}
 
-	button {
-		padding: .5rem 2rem;
-		border-radius: 99999px;
-		font-weight: 600;
-		font-size: 95%;
-		text-transform: uppercase;
-	}
+
 	h1 {
 		opacity: .85;
 	}
