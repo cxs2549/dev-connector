@@ -7,11 +7,13 @@ import Login from './views/Login/Login'
 import Alert from './components/layout/Alert/Alert'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import styled from 'styled-components'
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 
 // Redux
 import { Provider } from 'react-redux'
 import store from './store'
+import setAuthToken from './utils/setAuthToken'
+import { loadUser } from './actions/auth'
 
 const StyledMain = styled.main`
 	position: relative;
@@ -39,7 +41,14 @@ const StyledMain = styled.main`
 	}
 `
 
+if(localStorage.token) {
+	setAuthToken(localStorage.token)
+}
+
 const App = () => {
+	useEffect(() => {
+		store.dispatch(loadUser())
+	}, [])
 	const location = useLocation()
 	return (
 		<Provider store={store}>

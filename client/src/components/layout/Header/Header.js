@@ -1,10 +1,14 @@
 import styled from 'styled-components'
 import { BsCodeSquare } from 'react-icons/bs'
 import { NavLink, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { logout } from '../../../actions/auth'
+import { Fragment } from 'react'
 
 const StyledHeader = styled.header`
-position: relative;
-z-index: 11;
+	position: relative;
+	z-index: 11;
 	a {
 		position: relative;
 		&::after {
@@ -17,8 +21,11 @@ z-index: 11;
 			opacity: 0;
 			/* border-top-right-radius: 99999px; */
 			/* border-top-left-radius: 99999px; */
-			background-color: #2249DF;
+			background-color: #2249df;
 			transition: all 300ms ease-in-out;
+			@media (min-width: 768px) {
+				bottom: -.9rem;
+			}
 		}
 
 		&.active::after {
@@ -28,32 +35,61 @@ z-index: 11;
 		&.active {
 			opacity: 1;
 		}
-		
 	}
 `
-const Header = () => {
+const Header = ({ auth: { isAuthenticated, loading }, logout }) => {
 	const links = [ { name: 'developers' }, { name: 'register' }, { name: 'login' } ]
+	const alinks = [ { name: 'logout' } ]
+	const authLinks = (
+		<nav className="flex gap-8 capitalize text-sm font-medium">
+			{alinks.map((link, i) => (
+				<a
+					key={i}
+					onClick={logout}
+					href="#!"
+					className="opacity-75 hover:opacity-100 transition-opacity duration-300 md:text-lg"
+				>
+					{link.name}
+				</a>
+			))}
+		</nav>
+	)
+	const guestLinks = (
+		<nav className="flex gap-8 capitalize text-sm font-medium">
+			{links.map((link, i) => (
+				<NavLink
+					key={i}
+					to={link.name}
+					className="opacity-75 hover:opacity-100 transition-opacity duration-300 md:text-lg"
+				>
+					{link.name}
+				</NavLink>
+			))}
+		</nav>
+	)
 	return (
 		<StyledHeader className="border-b">
 			<div className="max-w-5xl mx-auto flex items-center justify-between px-4 xl:px-0 h-14 text-gray-900">
-
-                {/* logo */}
+				{/* logo */}
 				<Link to="/" className="flex items-center gap-2">
 					<BsCodeSquare size="25" className="opacity-80" />
-					<h1 className="font-semibold opacity-90 ">DevConnector</h1>
+					<h1 className="font-semibold md:text-lg opacity-90 xl:text-xl">DevConnector</h1>
 				</Link>
 
-                {/* links */}
-				<nav className="flex gap-8 capitalize text-sm font-medium">
-					{links.map((link, i) => (
-						<NavLink key={i} to={link.name} className="opacity-75 hover:opacity-100 transition-opacity duration-300">
-							{link.name}
-						</NavLink>
-					))}
-				</nav>
-
+				{/* links */}
+				{!loading && <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>}
 			</div>
 		</StyledHeader>
 	)
 }
-export default Header
+
+Header.propTypes = {
+	logout: PropTypes.func.isRequired,
+	auth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+	auth: state.auth
+})
+
+export default connect(mapStateToProps, { logout })(Header)
