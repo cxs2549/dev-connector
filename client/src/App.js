@@ -1,10 +1,13 @@
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import Header from './components/layout/Header/Header'
 import Home from './views/Home/Home'
+import Dashboard from './views/Dashboard/Dashboard'
 import Developers from './views/Developers/Developers'
 import Register from './views/Register/Register'
+import CreateProfile from './views/CreateProfile/CreateProfile'
 import Login from './views/Login/Login'
 import Alert from './components/layout/Alert/Alert'
+import PrivateRoute from './components/routing/PrivateRoute'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import styled from 'styled-components'
 import { Fragment, useEffect } from 'react'
@@ -18,30 +21,9 @@ import { loadUser } from './actions/auth'
 const StyledMain = styled.main`
 	position: relative;
 	z-index: 0;
-	.page-appear {
-		opacity: 0;
-	}
-	.page-appear-active {
-		opacity: 1;
-		transition: all 800ms;
-	}
-	.page-enter {
-		opacity: 0;
-	}
-	.page-enter-active {
-		opacity: 1;
-		transition: all 800ms;
-	}
-	.page-exit {
-		opacity: 1;
-	}
-	.page-exit-active {
-		opacity: 0;
-		transition: all 800ms;
-	}
 `
 
-if(localStorage.token) {
+if (localStorage.token) {
 	setAuthToken(localStorage.token)
 }
 
@@ -49,29 +31,34 @@ const App = () => {
 	useEffect(() => {
 		store.dispatch(loadUser())
 	}, [])
-	const location = useLocation()
 	return (
 		<Provider store={store}>
 			<Fragment>
 				<Header />
 				<StyledMain>
-					<TransitionGroup>
 						<Alert />
-						<CSSTransition
-							appear
-							key={location.key}
-							classNames="page"
-							timeout={800}
-							unmountOnExit
-						>
 							<Routes>
 								<Route path="/" element={<Home />} exact />
+								<Route
+									path="/dashboard"
+									element={
+										<PrivateRoute>
+											<Dashboard />
+										</PrivateRoute>
+									}
+								/>
+								<Route
+									path="/create-profile"
+									element={
+										<PrivateRoute>
+											<CreateProfile />
+										</PrivateRoute>
+									}
+								/>
 								<Route path="/developers" element={<Developers />} />
 								<Route path="/register" element={<Register />} />
 								<Route path="/login" element={<Login />} />
 							</Routes>
-						</CSSTransition>
-					</TransitionGroup>
 				</StyledMain>
 			</Fragment>
 		</Provider>

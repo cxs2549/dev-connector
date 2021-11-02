@@ -19,8 +19,6 @@ const StyledHeader = styled.header`
 			width: 10%;
 			height: 4px;
 			opacity: 0;
-			/* border-top-right-radius: 99999px; */
-			/* border-top-left-radius: 99999px; */
 			background-color: #2249df;
 			transition: all 300ms ease-in-out;
 			@media (min-width: 768px) {
@@ -42,15 +40,21 @@ const Header = ({ auth: { isAuthenticated, loading }, logout }) => {
 	const alinks = [ { name: 'logout' } ]
 	const authLinks = (
 		<nav className="flex gap-8 capitalize text-sm font-medium">
+			<NavLink
+					to="/dashboard"
+					className="opacity-75 hover:opacity-100 transition-opacity duration-300 md:text-lg"
+				>
+					Dashboard
+				</NavLink>
 			{alinks.map((link, i) => (
-				<a
+				<Link
 					key={i}
 					onClick={logout}
-					href="#!"
+					to="/login"
 					className="opacity-75 hover:opacity-100 transition-opacity duration-300 md:text-lg"
 				>
 					{link.name}
-				</a>
+				</Link>
 			))}
 		</nav>
 	)
